@@ -1,15 +1,7 @@
-package com.example.demo.dto;
+package com.example.cliente;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-@Entity
 public class Saludo {
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	private String prefijo;
 	private String nombre;
@@ -26,6 +18,10 @@ public class Saludo {
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+	@Override
+	public String toString() {
+		return "Saludo [prefijo=" + prefijo + ", nombre=" + nombre + ", sufijo=" + sufijo + "]";
 	}
 	public String getSufijo() {
 		return sufijo;
