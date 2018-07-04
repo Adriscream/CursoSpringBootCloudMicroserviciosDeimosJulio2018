@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
@@ -25,7 +26,7 @@ class HolaMundoController {
 	@Value("${message:Hello default}")
     private String message;
 	
-	@RequestMapping("/")
+	@RequestMapping(path="/",method=RequestMethod.GET)
 	public String home() {
 		//throw new RuntimeException();
 		return message;

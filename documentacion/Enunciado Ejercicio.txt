@@ -1,0 +1,140 @@
+-----------------------------------------------------------------------------------------------
+Tienda de Amazon de los Chinos
+-----------------------------------------------------------------------------------------------
+
+-------------------
+Requisitos
+-------------------
+
+Tienda Online, que de incio muestre todos los productos existentes, pudiendo realizar busquedas de productos mas concretas. Se puede visualizar el detalle del producto, que permite realizar la compra de dicho producto directamente (solo un producto por compra, aunque pueden ser varias unidades).
+
+El backend de la tienda se comunicara con un servicio de transportes y otro de cobro
+
+-----------------------------------------------------------------------------------------------
+Tienda
+-----------------------------------------------------------------------------------------------
+
+-------------------
+Modelo de datos (No definir las relaciones en BD ya que las tablas estarán en bases de datos distintas)
+-------------------
+
+BD de Usuarios
+
+	Usuario
+		long idUsuario
+		string nombre
+		string apellidos
+		long idDireccion (1-1)
+
+	Direccion
+		long idDireccion
+		string calle
+		string numero
+		int piso
+		string letra
+		string ciudad
+		string provincia
+
+	Tarjetas
+		long idUsuario
+		string titular
+		long numTarjeta
+		string cvc
+		int mes
+		int anyo
+
+BD Inventario
+
+	Producto
+		long idProducto
+		string nombre
+		string descripcion
+		int popularidad
+		int cantidad
+		double precio
+
+BD Pedidos
+
+	Pedido
+		long idPedido
+		long idUsuario (1-n)
+		long idProducto (1-n)
+		long idTransporte (1-1)
+		string estado
+
+-------------------
+Funcionalidades
+-------------------
+
+	Gestion Productos
+
+		altaProducto(Producto)
+		reducirStock(idProducto, cantidad)
+		ampliarStock(idProducto, cantidad)
+
+	Tienda
+
+		List<Producto> buscarPorTexto(texto)
+		List<Producto> buscarPorPopularidad(popularidad)
+		List<Producto> buscarDiezMasPopulares()
+		idPedido comprar(idUsuario, idProducto, cantidad, idTarjeta)
+
+	Gestion Usuario
+
+		altaUsuario(Usuario)
+		consultaTarjetas(idUsuario)
+
+-----------------------------------------------------------------------------------------------
+Servicio Transportitas
+-----------------------------------------------------------------------------------------------
+
+-------------------
+Modelo de Datos
+-------------------
+
+	Cliente
+		
+		long idCliente
+		Direccion direccionOrigenTransporte
+		String tarifa
+		DatosPago datosPago
+
+	Transporte
+		long idTransporte
+		long idCliente
+		Direccion direccionDestinoTransporte
+		long idPedido
+
+	Direccion
+		string calle
+		string numero
+		int piso
+		string letra
+		string ciudad
+		string provincia
+
+-------------------
+Funcionalidad
+-------------------
+
+	idTransporte contratarTransporte(idCliente, direccionDestinoTransporte, idPedido)
+
+-----------------------------------------------------------------------------------------------
+Servicio Cobro
+-----------------------------------------------------------------------------------------------
+
+-------------------
+Modelo de Datos
+-------------------
+
+	DatosPago
+		long numTarjeta
+		string cvc
+		int mes
+		int anyo
+
+-------------------
+Funcionalidad
+-------------------
+
+	pagar(datosPago)
