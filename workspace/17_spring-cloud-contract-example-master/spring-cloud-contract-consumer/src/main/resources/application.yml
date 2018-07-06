@@ -2,7 +2,7 @@ bookservice:
   ribbon:
     eureka:
       enabled: false
-    #listOfServers: localhost:8081
+    #listOfServers: localhost:9090
 
 stubrunner:
   idsToServiceIds:
