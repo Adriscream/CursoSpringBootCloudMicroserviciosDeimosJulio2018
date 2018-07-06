@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.security.Principal;
 
 @RestController
-@PreAuthorize("hasRole('USER')")
+@PreAuthorize("#oauth2.hasScope('write')")
 public class UserController {
 
     @RequestMapping("/")
